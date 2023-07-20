@@ -1,16 +1,14 @@
-package TerminalChat;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ChatClient1 {
+public class ChatClient {
     private static final String SERVER_IP = "2001:56a:7950:fa00:d89a:67e7:c467:1e9e";
     private static final int SERVER_PORT = 8080;
     private String username;
 
-    public ChatClient1(String username) {
+    public ChatClient(String username) {
         this.username = username;
     }
 
@@ -48,7 +46,7 @@ public class ChatClient1 {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
 
-        ChatClient1 client = new ChatClient1(username);
+        ChatClient client = new ChatClient(username);
         client.start();
     }
 }

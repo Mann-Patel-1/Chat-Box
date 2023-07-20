@@ -1,5 +1,3 @@
-package TerminalChat;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -8,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ChatServer1 {
+public class ChatServer {
     private static final int PORT = 8080;
     private List<PrintWriter> clients;
 
-    public ChatServer1() {
+    public ChatServer() {
         clients = new ArrayList<>();
     }
 
@@ -73,7 +71,7 @@ public class ChatServer1 {
     }
 
     public static void main(String[] args) {
-        ChatServer1 server = new ChatServer1();
+        ChatServer server = new ChatServer();
         server.start();
     }
 }

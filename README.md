@@ -1,65 +1,52 @@
-# Chat Application
+# Java Server Chat Application
 
-## Overview
+## Purpose
+This project is a simple Java-based chatting application that demonstrates how to create a basic server-client architecture to facilitate real-time communication between multiple clients. The server accepts incoming connections from clients and broadcasts messages received from one client to all connected clients, allowing them to chat with each other.
 
-The Chat Application is a simple Java-based client-server chat system that allows users to communicate with each other in real-time. This application consists of two main components: the server, which handles client connections and message broadcasting, and the client, which allows users to send and receive messages from the server and other connected clients.
+The main objectives of this project are:
+- Learn how to implement a simple server in Java.
+- Understand the basics of creating a client-server architecture for real-time communication.
+- Demonstrate socket programming in Java.
 
-## Features
+## Prerequisites
+To run this chat application, you need the following:
+- Java Development Kit (JDK) installed on your machine.
+- An integrated development environment (IDE) such as IntelliJ IDEA or Eclipse (optional but recommended).
 
-- Real-time chat: Instantly send and receive messages between clients.
-- Multiple clients: The server supports connections from multiple clients simultaneously.
-- Simple and intuitive: Easy-to-use interface for seamless communication.
+## How to Use in IDE
+1. Clone this repository to your local machine or download the ZIP file and extract it.
+2. Open your preferred IDE (e.g., IntelliJ IDEA or Eclipse).
+3. Import the project into the IDE:
+   - In IntelliJ IDEA: Go to `File > Open`, and select the project folder.
+   - In Eclipse: Go to `File > Import > General > Existing Projects into Workspace`, and select the project folder.
+4. Run the `ChatServer.java` file to start the chat server.
+5. Run the `ChatClient.java` file to start the chat client.
+6. When prompted, enter a unique username for each client.
+7. Now, you can start chatting with other clients connected to the server through the IDE's console.
 
-## Requirements
+## How to Use in Terminal
+1. Clone this repository to your local machine or download the ZIP file and extract it.
+2. Open your terminal or command prompt.
+3. Navigate to the project directory.
+4. Compile the Java files using the following commands: 
+   ```javac ChatServer.java```
+   ```javac ChatClient.java```
+5. Start the chat server by running the following command:
+   ```this is```
+6. In a separate terminal window, start the chat client(s) by running the following command:
+   ```java ChatClient```
+7. When prompted, enter a unique username for each client.
+8. Now, you can start chatting with other clients connected to the server through the terminal.
 
-- Java Development Kit (JDK) 8 or above installed on the system.
-- A text editor or Integrated Development Environment (IDE) to run the Java code.
+## Screenshots
+![Server Terminal Screenshot](/screenshots/server_terminal.png)
+*Description: Screenshot of the chat server running in the terminal.*
 
-## How to Use
+![Client Terminal Screenshot](/screenshots/client_terminal.png)
+*Description: Screenshot of a chat client running in the terminal.*
 
-1. **Clone or download the Chat Application repository to your local machine.**
+## Notes
+- The server IP address in the `ChatClient.java` file should be replaced with the actual public IP address of the machine where the server is running.
+- This is a basic implementation and lacks some features like error handling and security. It is recommended to enhance it for production-level use.
 
-2. **Open the server-side code:**
-   - Navigate to the `server` directory in the repository.
-   - Modify the server configuration (e.g., port number) in the `SimpleChatServer.java` file if needed.
-
-3. **Start the server:**
-   - Compile and run the `SimpleChatServer.java` file.
-   - The server will start listening on the specified port, waiting for client connections.
-
-4. **Open the client-side code:**
-   - Navigate to the `client` directory in the repository.
-   - Modify the client configuration (e.g., server IP address, port number) in the `SimpleChatClient.java` file if needed.
-
-5. **Start the client(s):**
-   - Compile and run the `SimpleChatClient.java` file.
-   - The client will connect to the specified server and display the chat interface.
-
-6. **Chatting:**
-   - Once the clients are connected, they can send and receive messages.
-   - Type a message in the client's console and press Enter to send it to the server.
-   - The server will broadcast the message to all connected clients, including the sender.
-
-7. **Exiting the client:**
-   - To exit the client, simply close the console or press `Ctrl+C`.
-
-8. **Stopping the server:**
-   - To stop the server, close its console or press `Ctrl+C`.
-
-## Additional Notes
-
-- The Chat Application is a simple example and may not be suitable for production use.
-- The application does not implement advanced features like message history, user authentication, or encryption, and it may not be suitable for sensitive communications.
-- This project can be used as a starting point for building more complex chat applications by extending its functionalities.
-
-## License
-
-[MIT License](LICENSE)
-
-Please review the license file (LICENSE) for usage details and limitations.
-
-## Contributors
-
-This project is an Open-Source initiative. We welcome contributions and improvements from the community. Feel free to open issues, submit pull requests, or provide feedback.
-
-Thank you for using the Chat Application! Happy chatting! 😊
+Happy chatting!
