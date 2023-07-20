@@ -1,77 +1,64 @@
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ChatServer {
-    private static final int PORT = 8080;
-    private List<PrintWriter> clients;
-
-    public ChatServer() {
-        clients = new ArrayList<>();
-    }
+    private static final int PORT = 12345;
+    private List<Socket> clients = new ArrayList<>();
 
     public void start() {
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
-            System.out.println("Server started on port " + PORT);
+            System.out.println("Server started. Listening on port: " + PORT);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
-                clients.add(writer);
-
-                Thread clientThread = new Thread(new ClientHandler(clientSocket, writer));
-                clientThread.start();
+                clients.add(clientSocket);
+                System.out.println("New client connected: " + clientSocket.getInetAddress().getHostAddress());
+                new Thread(() -> handleClient(clientSocket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private class ClientHandler implements Runnable {
-        private Socket clientSocket;
-        private PrintWriter writer;
+    private void handleClient(Socket clientSocket) {
+        try {
+            InputStream inputStream = clientSocket.getInputStream();
+            OutputStream outputStream = clientSocket.getOutputStream();
 
-        public ClientHandler(Socket clientSocket, PrintWriter writer) {
-            this.clientSocket = clientSocket;
-            this.writer = writer;
-        }
-
-        @Override
-        public void run() {
-            try {
-                Scanner reader = new Scanner(clientSocket.getInputStream());
-                while (reader.hasNextLine()) {
-                    String message = reader.nextLine();
-                    broadcast(message);
+            while (true) {
+                byte[] buffer = new byte[1024];
+                int bytesRead = inputStream.read(buffer);
+                if (bytesRead == -1) {
+                    break;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                clients.remove(writer);
-                writer.close();
-                try {
-                    clientSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                String message = new String(buffer, 0, bytesRead);
+                System.out.println("Received from " + clientSocket.getInetAddress().getHostAddress() + ": " + message);
+
+                // Broadcast the message to all clients
+                for (Socket client : clients) {
+                    if (client != clientSocket) {
+                        client.getOutputStream().write(buffer, 0, bytesRead);
+                    }
                 }
             }
-        }
 
-        private void broadcast(String message) {
-            for (PrintWriter client : clients) {
-                client.println(message);
-                client.flush();
-            }
+            System.out.println("Client disconnected: " + clientSocket.getInetAddress().getHostAddress());
+            clientSocket.close();
+            clients.remove(clientSocket);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        ChatServer server = new ChatServer();
-        server.start();
+        ChatServer chatServer = new ChatServer();
+        chatServer.start();
     }
 }
