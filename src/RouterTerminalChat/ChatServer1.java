@@ -1,4 +1,4 @@
-package TerminalChat;
+package RouterTerminalChat;
 
 import java.io.IOException;
 import java.io.PrintWriter;

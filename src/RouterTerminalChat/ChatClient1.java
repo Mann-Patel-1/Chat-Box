@@ -1,4 +1,4 @@
-package TerminalChat;
+package RouterTerminalChat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ChatClient1 {
     private static final String SERVER_IP = "2001:56a:7950:fa00:d89a:67e7:c467:1e9e";
-    private static final int SERVER_PORT = 8080;
+      private static final int SERVER_PORT = 8080;
     private String username;
 
     public ChatClient1(String username) {
